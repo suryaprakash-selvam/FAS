@@ -1,0 +1,395 @@
+Admin -  User/HR creation/update/delete
+HR    -  View employee info/ Update ticket status / Timesheet,Leave request approval
+User  -  Persona info view/ Ticket creation/ Timesheet / Leave Request
+
+Department :
+Engineering Service
+IT Service
+Infrastructure
+CyberSecurity
+General
+
+
+HRMS API:
+endpoint: hrms/user/signUp
+URL: http://127.0.0.1:3000/hrms/user/signUp
+1.Signup API(POST) :
+Request:
+ {
+  userId:"123",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department"
+ }
+
+validation-> userId,mobileNumber,emailId , HR(department)
+
+No error
+Response:
+{
+status:200
+message:"User created Successfully"
+}
+
+error
+{
+Response:
+{
+status:403,
+isError:true
+errorMessage:"Mobile number already exist"
+}}
+
+2. Login API ()
+url: http://127.0.0.1:3000/hrms/user/login
+endpoint: hrms/user/login
+Request:
+{
+  emailId:"xyz@gmail.com",
+  password:"pass"
+ }
+
+No error
+Response:
+{
+  status:200,
+  user:{
+  userId:"123",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department"
+   }
+ }
+
+error
+{
+Response:
+{
+status:403,
+isError:true
+errorMessage:"Invalid emailId/password"
+}}
+
+
+3.GetAllEmployeesList(GET)
+
+URL: http://127.0.0.1:3000/hrms/user/getAllEmployees
+endpoint: hrms/getAllEmployees
+Response:
+{
+userList:[{
+userId:"123",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department",
+
+},
+userId:"456",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department"
+]
+
+}
+
+13.GetAllEmployeesByDepartment(GET)
+
+endpoint: hrms/getAllEmployeesByDepartment/{department}
+Response:
+{
+userList:[{
+userId:"123",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department",
+
+},
+userId:"456",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department"
+]
+
+}
+
+
+
+4.GetEmployeeDetails
+URL: http://127.0.0.1:3000/hrms/user/getEmployeeDetails/17
+endpoint: hrms/getEmployeeDetails/{userId}
+Response:
+{
+user:{
+  userId:"123",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department"
+}
+userData:{
+  userId:""
+  basic:""
+  gratuity:""
+  bonus:""
+  pf:""
+  totalMonthlyAmount:""
+  totaLeaveCredited:""
+  leaveBalance:""
+  department:""
+}
+}
+
+
+5.UpdateEmployee(Update):
+URL : http://127.0.0.1:3000/hrms/user/updateEmployee/17
+endpoint: hrms/updateEmployee/{userId}
+
+Request:
+{
+  userId:"123",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department"
+}
+
+Response{
+ status:200
+ message:"Successfully updated"
+ user:{
+  userId:"123",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department"
+ }
+}
+
+
+6. CreateTicketAPI(Post)
+URL : http://127.0.0.1:3000/hrms/user/updateEmployee/17
+endpoint: hrms/createTicket
+Request:{
+ "ticketId":"Autogenerate"
+ "userId":""
+ "ticketStatus":"New"
+ "description":""
+ "title":""
+ "department":""
+}
+
+Response{
+status:200
+message:"Ticket created Successfully"
+ticketDetails:{
+ ticketId:"Autogenerate"
+ userId:""
+ ticketStatus:"New"
+ description:""
+ title:""
+ department:""
+}
+}
+
+7.GetTicketDetailsByDepartment(Get)
+url: http://127.0.0.1:3000/hrms/tkmt/getTicketDetails/department
+endpoint: hrms/getTicketDetails/{department}
+Response:{
+ticketDetailList:[{
+ticketId:""
+ userId:""
+ ticketStatus:"New/Inprogress/Closed"
+ description:""
+ title:""
+ department:""
+ comment:""
+}]
+}
+
+14.GetTicketDetailsByEmployee(Get)
+Url: http://127.0.0.1:3000/hrms/tkmt/GetTicketDetailsByEmployee/17
+endpoint: hrms/GetTicketDetailsByEmployee/{userId}
+Response:{
+ticketDetailList:[{
+ticketId:""
+ userId:""
+ ticketStatus:"New/Inprogress/Closed"
+ description:""
+ title:""
+ department:""
+ comment:""
+}]
+}
+
+8. UpdateTicketAPI(Post)
+URl: http://127.0.0.1:3000/hrms/tkmt/updateTicket
+endpoint: hrms/updateTicket
+Request:{
+ ticketId:""  /// you have send correct ticket id in request
+ userId:""
+ ticketStatus:"Closed"
+ description:""
+ title:""
+ department:""
+ comment:""
+}
+
+Response{
+status:200
+message:"Ticket updated Successfully"
+ticketDetails:{
+ ticketId:""
+ userId:""
+ ticketStatus:"Closed"
+ description:""
+ title:""
+ department:""
+ comment:""
+}
+}
+
+
+9.CreateLeaveRequest(POST)
+Url: http://127.0.0.1:3000/hrms/leavemgmt/createLeaveRequest
+endpoint: hrms/createLeaveRequest
+Request:{
+  leaveId:"Autogenerate"
+  userId:""
+  appliedDate:""
+  leaveRequestFromDate:""
+  leaveRequestToDate:""
+  noOfDays:""
+  leaveStatus:"Applied"
+  department:""
+  reason:""
+}
+Response:{
+status:200,
+message:"Leave request created successfully"
+}
+
+
+10.getLeaveDetailsByEmployee(Get)
+Url: http://127.0.0.1:3000/hrms/leavemgmt/getLeaveDetailsByEmployee/{userId}
+endpoint: hrms/getLeaveDetailsByEmployee/{userId}
+Response:{
+leaveList:[{
+  leaveId:""
+  userId:""
+  appliedDate:""
+  leaveRequestFromDate:""
+  leaveRequestToDate:""
+  noOfDays:""
+  leaveStatus:"Applied/Approved"
+  department:""
+  reason:""
+}]}
+
+11.getLeaveDetailsByDepartment(Get)
+url: http://127.0.0.1:3000/hrms/leavemgmt/getLeaveDetailsByDepartment/{department}
+endpoint: hrms/getLeaveDetailsByDepartment/{department}
+Response:{
+leaveList:[{
+  leaveId:""
+  userId:""
+  appliedDate:""
+  leaveRequestFromDate:""
+  leaveRequestToDate:""
+  noOfDays:""
+  leaveStatus:"Applied/Approved"
+  department:""
+  reason:""
+}]}
+
+12.approveLeaveRequestAPI(UPDATE)
+url: http://127.0.0.1:3000/hrms/leavemgmt/approveLeaveRequest
+endpoint: hrms/approveLeaveRequest
+Request:{
+leaveId:""
+leaveStatus:"Approved"
+}
+
+logic-> update in leaveManagement,userData(leaveBalance) tables
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+user:
+
+  userId:"123",
+  userName:"surya",
+  userRole:"HR/employee",
+  mobileNumber:"7373553917",
+  emailId:"xyz@gmail.com",
+  password:"pass"
+  department:"department"
+
+userData:
+  userId:""
+  basic:""
+  gratuity:""
+  bonus:""
+  pf:""
+  totalMonthlyAmount:""
+  totaLeaveCredited:""
+  leaveBalance:""
+  department:""
+
+leaveManagement:
+  leaveId:""
+  userId:""
+  appliedDate:""
+  leaveRequestFromDate:""
+  leaveRequestToDate:""
+  noOfDays:""
+  leaveStatus:"Applied/Approved"
+  reason:""
+  department:""
+
+ticketManagement:
+ ticketId:""
+ userId:""
+ ticketStatus:"New/Inprogress/Closed"
+ description:""
+ title:""
+ comment:""
+ department:""
+
+
+
+

@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
     {
+    UserId:{
+        required: true,
+        type:Number,
+        unique: true
+    },
     Pwd:{
         required: true,
         type: String
@@ -29,15 +34,9 @@ const userSchema = new mongoose.Schema(
         type:String
     },
     Department:{
-        required:true,
+        
         type:String
-    }, SnoId: {
-        required:true,
-        type:Number,
-        unique: true
     }
 })
-
-
 
 module.exports = mongoose.model('User', userSchema)

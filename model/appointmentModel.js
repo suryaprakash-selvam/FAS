@@ -15,6 +15,10 @@ const appointmentSchema = new mongoose.Schema(
             required:true,
             type:String
         },
+        userEmailId:{
+            required:true,
+            type:String
+        },
         Department:{
             required:true,
             type:String
@@ -33,7 +37,7 @@ const appointmentSchema = new mongoose.Schema(
         },
         Slot:{
             required:true,
-            type:String
+            type:Number
         },
         Reason:{
             required:true,
